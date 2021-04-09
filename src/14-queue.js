@@ -11,17 +11,51 @@
  *
  */
 
+function ListNode (value) {
+  this.value = value;
+  this.next = null;
+}
+
 class Queue {
-  get size() {
-    throw new Error('Not implemented');
+  constructor() {
+    this.front = null;
+    this.back = null;
   }
 
-  enqueue(/* element */) {
-    throw new Error('Not implemented');
+  get size() {
+    const tempArr = [];
+    let temp = this.front;
+    while (temp) {
+      tempArr.push(temp.value);
+      temp = temp.next;
+    }
+    return tempArr.length;
+  }
+
+  isEmpty() {
+    return !this.front;
+  }
+
+  enqueue(element) {
+    const node = new ListNode(element);
+    if (this.isEmpty()) {
+      this.back = node;
+      this.front = this.back;
+    } else {
+      this.back.next = node;
+      this.back = node;
+    }
   }
 
   dequeue() {
-    throw new Error('Not implemented');
+    const node = this.front;
+    if (this.front) {
+      this.front = this.front.next;
+    }
+    if (!this.isEmpty()) {
+      this.back = null;
+    }
+    return node;
   }
 }
 
