@@ -11,12 +11,13 @@
  */
 function getCommonCharacterCount(s1, s2) {
   let count = 0;
-  while (s1.length && s2.length) {
+  while (s1.length && s2.length){
     if (s2.includes(s1.charAt(0))) {
       count++;
-      s2 = s2.replace(s1.charAt(0), '');
+      s2 = s2.replace(s1.charAt(0),'');
       s1 = s1.slice(1);
-    } else {
+    }
+    else {
       s1 = s1.slice(1);
     }
   }
