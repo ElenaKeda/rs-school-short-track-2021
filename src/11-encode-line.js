@@ -9,15 +9,23 @@
  *
  */
 function encodeLine(str) {
-  const string = str;
-  const obj = {};
-  const chars = string.split('');
-  for (let i = 0; i < chars.length; i++) {
-    const count = obj[chars[i]] ? obj[chars[i]] : 0;
-    obj[chars[i]] = count + 1;
+  const arrStr = str.split('');
+  let count = 1;
+  for (let i = 0; i < arrStr.length; i++) {
+    if (arrStr[i] === arrStr[i + 1]) {
+      if (i !== 0 && typeof arrStr[i - 1] === 'number') {
+        count++;
+        arrStr[i] = count;
+        arrStr[i - 1] = '';
+      } else {
+        count++;
+        arrStr[i] = count;
+      }
+    } else {
+      count = 1;
+    }
   }
-  const s = Object.entries(obj).map((item) => (item.reverse())).flat().join('');
-  return s.replace(/1/gi, '');
+  return arrStr.join('');
 }
 
 module.exports = encodeLine;
