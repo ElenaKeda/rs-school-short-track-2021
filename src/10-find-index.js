@@ -11,34 +11,22 @@
  * For ([1, 2, 3], 2) should return 1
  *
  */
-function findIndex(arr, val, startVal, endVal, i) {
-  let result;
-  let array = arr;
+function findIndex(arr, val) {
+  const array = arr;
   const value = val;
-  let start = startVal;
-  let end = endVal;
-  let ind = i;
-  end = array.length - 1;
-  start = start || 0;
-  ind = ind || 0;
-  const middle = Math.floor((start + (end - start) / 2));
-  if (value === array[middle]) {
-    // return middle;
-    result = middle;
+  let low = 0;
+  let high = array.length - 1;
+  while (low <= high) {
+    const middle = low + Math.ceil((high - low) / 2);
+    if (value < array[middle]) {
+      high = middle - 1;
+    } else if (value > array[middle]) {
+      low = middle + 1;
+    } else {
+      return middle;
+    }
   }
-  if (end - 1 === start) {
-    result = Math.abs(array[start] - value) > Math.abs(array[end] - value) ? end : start;
-  }
-  if (value > array[middle]) {
-    ind = array.indexOf(array[middle]);
-    array = array.slice(middle);
-    result = findIndex(array, value, middle, end, ind) + ind;
-  }
-  if (value < array[middle]) {
-    array = array.slice(0, middle);
-    result = findIndex(array, value, start, middle, ind) + ind;
-  }
-  return result;
+  return array.length - 1;
 }
 
 module.exports = findIndex;
