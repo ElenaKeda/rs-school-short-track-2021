@@ -17,8 +17,24 @@
  * }
  */
 
+// function ListNode(x) {
+//   this.value = x;
+//   this.next = null;
+// }
+
 function removeKFromList(l, k) {
-  return l.filter((item) => (item !== k));
+  const list = l;
+  const int = k;
+  if (Array.isArray(list)) {
+    return list.filter((item) => (item !== int));
+  }
+  const nodes = [];
+  let currentNode = list.value;
+  while (currentNode) {
+    nodes.push(currentNode);
+    currentNode = currentNode.next;
+  }
+  return nodes.filter((item) => (item !== int));
 }
 
 module.exports = removeKFromList;
